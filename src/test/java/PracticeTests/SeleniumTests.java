@@ -121,7 +121,7 @@ public class SeleniumTests {
     }
 
     @Test
-    public void promptPopup() {
+    public void promptPopupOk() {
         page.OpenSite();
         page.ClickPopup();
         driver.findElement(By.xpath("//button[@id='prompt']")).click();
@@ -131,6 +131,17 @@ public class SeleniumTests {
         String promptTextOk =
                 driver.findElement(By.xpath("//div[@id='columns']//p[@id='promptResult']")).getText();
         assertEquals("Nice to meet you, Test!", promptTextOk);
+    }
 
+    @Test
+    public void promptPopupCancel(){
+        page.OpenSite();
+        page.ClickPopup();
+        driver.findElement(By.xpath("//button[@id='prompt']")).click();
+        driver.switchTo().alert().dismiss();
+
+        String promptCancel =
+                driver.findElement(By.xpath("//div[@id='columns']//p[@id='promptResult']")).getText();
+        assertEquals("Fine, be that way...", promptCancel);
     }
 }
