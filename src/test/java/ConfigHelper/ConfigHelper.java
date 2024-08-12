@@ -39,4 +39,9 @@ public class ConfigHelper {
         String XpathPopup = properties.getProperty("xpathPopup");
         return XpathPopup;
     }
+
+    public static String getXpathSlider(){
+        String XpathSlider = properties.getProperty("xpathSlider");
+        return XpathSlider;
+    }
 }
