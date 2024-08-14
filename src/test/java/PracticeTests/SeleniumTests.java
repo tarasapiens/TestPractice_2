@@ -166,4 +166,11 @@ public class SeleniumTests {
         Actions actions = new Actions(driver);
         actions.moveToElement(slider, 350, 0).click().build().perform();
     }
+
+    @Test
+    public void checkCalendars(){
+        page.OpenSite();
+        page.ClickCalendars();
+        page.SetDateCalendar("August", "17", "2024");
+    }
 }

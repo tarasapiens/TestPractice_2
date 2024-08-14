@@ -18,30 +18,29 @@ public class ConfigHelper {
     }
 
     public static String getBaseURL() {
-        String BaseURL = properties.getProperty("baseurl");
 
-        return BaseURL;
+        return properties.getProperty("baseurl");
     }
 
     public static String getXPathJSDelays() {
-        String XPathJSDelays = properties.getProperty("xpathJSDelay");
 
-        return XPathJSDelays;
+        return properties.getProperty("xpathJSDelay");
     }
 
     public static String getXpathFormField(){
-        String XpathFormField = properties.getProperty("xpathFormField");
 
-        return XpathFormField;
+        return properties.getProperty("xpathFormField");
     }
 
     public static String getXpathPopup(){
-        String XpathPopup = properties.getProperty("xpathPopup");
-        return XpathPopup;
+        return properties.getProperty("xpathPopup");
     }
 
     public static String getXpathSlider(){
-        String XpathSlider = properties.getProperty("xpathSlider");
-        return XpathSlider;
+        return properties.getProperty("xpathSlider");
+    }
+
+    public static String getXpathCalendars(){
+        return properties.getProperty("xpathCalendars");
     }
 }
