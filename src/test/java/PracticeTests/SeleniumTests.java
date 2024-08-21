@@ -3,12 +3,14 @@ package PracticeTests;
 import Pages.SitePages;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -35,7 +37,7 @@ public class SeleniumTests {
     @BeforeEach
     public void SetDriver() {
         driver = new ChromeDriver();
-//        driver.manage().timeouts().implicitlyWait(ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(ofSeconds(20));
         driver.manage().window().maximize();
         page = new SitePages(driver);
     }
@@ -173,4 +175,29 @@ public class SeleniumTests {
         page.ClickCalendars();
         page.SetDateCalendar("August", "17", "2024");
     }
+
+    @Test
+    public void checkSimpleModals() throws InterruptedException {
+        page.OpenSite();
+        page.ClickModals();
+        driver.findElement(By.xpath("//button[@id='simpleModal']")).click();
+
+        Thread.sleep(3000L);
+
+        WebElement element = (driver.findElement
+                (By.xpath("//div[@id='popmake-1318']//div[@class='pum-content popmake-content']//p")));
+
+        String text = element.getText();
+        assertEquals("Hi, I’m a simple modal.", text);
+    }
+
+    @Test
+    public void checkFormsModal() {
+        page.OpenSite();
+        page.ClickModals();
+        driver.findElement(By.xpath("//button[@id='formModal']")).click();
+        page.SendMessageModal("Sergey", "test@mail.ru", "Test message");
+    }
+
+
 }

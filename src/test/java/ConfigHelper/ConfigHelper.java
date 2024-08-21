@@ -40,7 +40,7 @@ public class ConfigHelper {
         return properties.getProperty("xpathSlider");
     }
 
-    public static String getXpathCalendars(){
-        return properties.getProperty("xpathCalendars");
-    }
+    public static String getXpathCalendars(){ return properties.getProperty("xpathCalendars"); }
+
+    public static String getXpathModals(){return properties.getProperty("xpathModals");}
 }
