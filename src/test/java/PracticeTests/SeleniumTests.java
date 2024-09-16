@@ -199,5 +199,21 @@ public class SeleniumTests {
         page.SendMessageModal("Sergey", "test@mail.ru", "Test message");
     }
 
+    @Test
+    public void checkTables(){
+        page.OpenSite();
+        page.ClickTables();
+        String orangesPrice = page.getItemPrice("Oranges");
+        assertEquals(orangesPrice, "$3.99", "Price Oranges incorrect");
+
+        String laptopPrice = page.getItemPrice("Laptop");
+        assertEquals(laptopPrice, "$1200.00", "Price Laptop incorrect");
+
+        String marblesPrice = page.getItemPrice("Marbles");
+        assertEquals(marblesPrice, "$1.25", "Price Marbles incorrect");
+
+
+    }
+
 
 }

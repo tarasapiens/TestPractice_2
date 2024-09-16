@@ -77,6 +77,17 @@ public class SitePages {
         driver.findElement(modalSubmit).click();
     }
 
+    public void ClickTables(){
+        WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathTables()));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].scrollIntoView();", element);
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public String getItemPrice(String item){
+        return driver.findElement(By.xpath("//td[text()='"+ item + "']/following-sibling::td")).getText();
+    }
+
 
 
 }

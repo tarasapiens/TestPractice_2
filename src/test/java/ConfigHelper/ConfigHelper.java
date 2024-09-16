@@ -43,4 +43,5 @@ public class ConfigHelper {
     public static String getXpathCalendars(){ return properties.getProperty("xpathCalendars"); }
 
     public static String getXpathModals(){return properties.getProperty("xpathModals");}
+    public static String getXpathTables(){return properties.getProperty("xpathTables");}
 }
