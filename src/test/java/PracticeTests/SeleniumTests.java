@@ -211,9 +211,26 @@ public class SeleniumTests {
 
         String marblesPrice = page.getItemPrice("Marbles");
         assertEquals(marblesPrice, "$1.25", "Price Marbles incorrect");
-
-
     }
+
+    @Test
+    public void checkNewWindow(){
+        page.OpenSite();
+        page.ClickWindow();
+        page.ClickNewWindow();
+        page.SwitchToNewWindow();
+        assertEquals(page.getPageTitle(), "automateNow | The Best FREE Software Online Training Platform");
+    }
+
+    @Test
+    public void checkNewTab() {
+        page.OpenSite();
+        page.ClickWindow();
+        page.ClickNewTab();
+        assertEquals(page.getPageTitle(), "Window Operations | Practice Automation");
+    }
+
+
 
 
 }

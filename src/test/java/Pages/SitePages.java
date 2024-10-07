@@ -6,6 +6,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Iterator;
+import java.util.Set;
+
 public class SitePages {
 
     private final WebDriver driver;
@@ -17,59 +20,71 @@ public class SitePages {
     private final By modalEmail = By.xpath("//input[@id='g1051-email']");
     private final By modalMessage = By.xpath("//textarea[@id='contact-form-comment-g1051-message']");
     private final By modalSubmit = By.xpath("//button[@class='pushbutton-wide']");
+    private final By newWindowBtn = By.xpath("//button[@onclick='newWindow()']");
+    private final By pageTitle = By.xpath("//h2/strong[text()='Start learning']");
+    private final By newTabBtn = By.xpath("//button[@onclick='newTab()']");
 
 
     public SitePages(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void OpenSite(){
+    public void OpenSite() {
         driver.get(ConfigHelper.getBaseURL());
     }
 
-    public void ClickJSDelay(){ driver.findElement(By.xpath(ConfigHelper.getXPathJSDelays())).click();}
-    public void ClickFormField(){driver.findElement(By.xpath(ConfigHelper.getXpathFormField())).click();}
+    public void ClickJSDelay() {
+        driver.findElement(By.xpath(ConfigHelper.getXPathJSDelays())).click();
+    }
 
-    public void ClickStart(){driver.findElement(By.xpath("//button[@id='start']")).click();}
+    public void ClickFormField() {
+        driver.findElement(By.xpath(ConfigHelper.getXpathFormField())).click();
+    }
 
-    public void ClickPopup(){driver.findElement(By.xpath(ConfigHelper.getXpathPopup())).click();}
+    public void ClickStart() {
+        driver.findElement(By.xpath("//button[@id='start']")).click();
+    }
 
-    public void ClickSlider(){
+    public void ClickPopup() {
+        driver.findElement(By.xpath(ConfigHelper.getXpathPopup())).click();
+    }
+
+    public void ClickSlider() {
         WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathSlider()));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].scrollIntoView();", element);
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public void ClickCalendars(){
+    public void ClickCalendars() {
         WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathCalendars()));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].scrollIntoView();", element);
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public void SetDateCalendar(String month, String day, String year){
+    public void SetDateCalendar(String month, String day, String year) {
         driver.findElement(calendarField).click();
 
-        while (true){
+        while (true) {
             String currentMonth = driver.findElement(calendarMonth).getText();
             String currentYear = driver.findElement(calendarYear).getText();
             if (currentMonth.equals(month) && currentYear.equals(year)) {
                 break;
             }
             driver.findElement(calendarField).click();
-            }
+        }
         driver.findElement(By.xpath("//table//a[text()='" + day + "']")).click();
     }
 
-    public void ClickModals(){
+    public void ClickModals() {
         WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathModals()));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].scrollIntoView();", element);
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public void SendMessageModal(String name, String email, String message){
+    public void SendMessageModal(String name, String email, String message) {
 
         driver.findElement(modalName).sendKeys(name);
         driver.findElement(modalEmail).sendKeys(email);
@@ -77,16 +92,60 @@ public class SitePages {
         driver.findElement(modalSubmit).click();
     }
 
-    public void ClickTables(){
+    public void ClickTables() {
         WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathTables()));
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].scrollIntoView();", element);
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public String getItemPrice(String item){
-        return driver.findElement(By.xpath("//td[text()='"+ item + "']/following-sibling::td")).getText();
+    public String getItemPrice(String item) {
+        return driver.findElement(By.xpath("//td[text()='" + item + "']/following-sibling::td")).getText();
     }
+
+    public void ClickWindow() {
+        WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathWindow()));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].scrollIntoView();", element);
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public String getWindowHandle() {
+        return driver.getWindowHandle();
+    }
+
+    public Set<String> getWindowHandles() {
+        return driver.getWindowHandles();
+    }
+
+    public void ClickNewWindow() {
+        driver.findElement(newWindowBtn).click();
+    }
+
+    public void SwitchToNewWindow() {
+        String currentWindow = getWindowHandle();
+        Set<String> handles = getWindowHandles();
+        Iterator<String> iter = handles.iterator();
+        String newWindow = null;
+
+        while (iter.hasNext()) {
+            newWindow = iter.next();
+            if (!currentWindow.equals(newWindow)) {
+                driver.switchTo().window(newWindow);
+            }
+        }
+    }
+
+    public void ClickNewTab(){
+        driver.findElement(newTabBtn).click();
+    }
+
+    public String getPageTitle(){
+        return driver.getTitle();
+    }
+
+
+
 
 
 
