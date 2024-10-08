@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class SitePages {
     private final By newWindowBtn = By.xpath("//button[@onclick='newWindow()']");
     private final By pageTitle = By.xpath("//h2/strong[text()='Start learning']");
     private final By newTabBtn = By.xpath("//button[@onclick='newTab()']");
+    private final By hover = By.id("mouse_over");
 
 
     public SitePages(WebDriver driver) {
@@ -109,6 +111,12 @@ public class SitePages {
         executor.executeScript("arguments[0].scrollIntoView();", element);
         executor.executeScript("arguments[0].click();", element);
     }
+    public void ClickHover(){
+        WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathHover()));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].scrollIntoView();", element);
+        executor.executeScript("arguments[0].click();", element);
+    }
 
     public String getWindowHandle() {
         return driver.getWindowHandle();
@@ -142,6 +150,21 @@ public class SitePages {
 
     public String getPageTitle(){
         return driver.getTitle();
+    }
+
+    public void hoverOverElement(By locator){
+        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+    }
+
+    public SitePages doHover(){
+        hoverOverElement(hover);
+        return this;
+    }
+
+    public String getHoverText(){
+        return driver.findElement(hover).getText();
     }
 
 

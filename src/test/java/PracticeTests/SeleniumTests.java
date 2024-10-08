@@ -230,6 +230,15 @@ public class SeleniumTests {
         assertEquals(page.getPageTitle(), "Window Operations | Practice Automation");
     }
 
+    @Test
+    public void checkHover(){
+        page.OpenSite();
+        page.ClickHover();
+        page.doHover();
+        String hoverText = page.getHoverText();
+        assertEquals(hoverText, "You did it!");
+    }
+
 
 
 
