@@ -46,6 +46,7 @@ public class ConfigHelper {
     public static String getXpathTables(){return properties.getProperty("xpathTables");}
     public static String getXpathWindow(){return properties.getProperty("xpathWindow");}
     public static String getXpathHover(){return properties.getProperty("xpathHover");}
+    public static String getXpathGestures(){return properties.getProperty("xpathGestures");}
 
 
 }

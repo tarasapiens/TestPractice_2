@@ -239,6 +239,17 @@ public class SeleniumTests {
         assertEquals(hoverText, "You did it!");
     }
 
+    @Test
+    public void checkGestures() throws InterruptedException {
+        page.OpenSite();
+        page.clickGestures();
+        int x_coordinate = 600;
+        int y_coordinate = -200;
+
+        page.dragMap(x_coordinate, y_coordinate);
+        Thread.sleep(5000);
+    }
+
 
 
 

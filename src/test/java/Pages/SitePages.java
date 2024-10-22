@@ -25,6 +25,7 @@ public class SitePages {
     private final By pageTitle = By.xpath("//h2/strong[text()='Start learning']");
     private final By newTabBtn = By.xpath("//button[@onclick='newTab()']");
     private final By hover = By.id("mouse_over");
+    private final By map = By.tagName("canvas");
 
 
     public SitePages(WebDriver driver) {
@@ -165,6 +166,24 @@ public class SitePages {
 
     public String getHoverText(){
         return driver.findElement(hover).getText();
+    }
+
+    public void clickGestures(){
+        WebElement element = driver.findElement(By.xpath(ConfigHelper.getXpathGestures()));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].scrollIntoView();", element);
+        executor.executeScript("arguments[0].click();", element);
+
+    }
+
+    public void dragAndDropByOffset(By locator, int x, int y){
+        Actions actions = new Actions(driver);
+        WebElement element = driver.findElement(locator);
+        actions.dragAndDropBy(element, x, y).perform();
+    }
+
+    public void dragMap(int x, int y){
+        dragAndDropByOffset(map, x, y);
     }
 
 
